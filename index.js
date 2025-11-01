@@ -1,14 +1,16 @@
-const express = require('express')
-const connectDB = require('./Connection')
+const express = require('express');
+const { connectDB } = require('./Connection');
 
-const app = express()
+const app = express();
 
 //Connection to MongoDB
-connectDB()
+connectDB();
 
 app.get('/', (req, res) => {
-    res.send('Connected to MongoDB!')
-})
-const port = process.env.Port || 3000
+    res.send('Connected to MongoDB, Welcome!')
+});
+
+const port = process.env.Port || 3000;
 
 app.listen(port,() => console.log("Server Started"))
+console.log('Web Sever is listening at port ' + port);
