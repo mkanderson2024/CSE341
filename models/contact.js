@@ -8,7 +8,8 @@ const contactSchema = new mongoose.Schema({
     workDescription2: String,
     linkTitleText: String,
     linkedInLink: { text: String, link: String },
-    githubLink: { text: String, link: String }
+    githubLink: { text: String, link: String },
+    nameLink: {firstName: String, url: String}
 });
 
 module.exports = mongoose.model('Contact', contactSchema)
