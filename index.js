@@ -1,14 +1,24 @@
 const express = require('express');
 const { connectDB } = require('./Connection');
+const contactRoute = require('./routes/contactRoute')
 
 const app = express();
+
+// Public Frontend Files
+app.use(express.static('public'));
+app.use(express.json());
 
 //Connection to MongoDB
 connectDB();
 
-app.get('/', (req, res) => {
-    res.send('Connected to MongoDB, Welcome!')
-});
+//Route for contacts for lesson 1
+app.use('/contact', contactRoute);
+
+
+// From Activity 1
+// app.get('/', (req, res) => {
+//     res.send('Connected to MongoDB, Welcome!')
+// });
 
 const port = process.env.Port || 3000;
 
