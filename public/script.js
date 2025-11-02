@@ -5,16 +5,16 @@ async function apiFetch(url) {
   return data;
 }
 
-// const getData = async () => {
-//   const data = await apiFetch('/contacts');
-//   console.log(data)
-//   displayAllData(data);
-// };
-
 const getData = async () => {
-  const data = await apiFetch('http://localhost:8080/professional');
+  const data = await apiFetch('/professional');
+  console.log(data)
   displayAllData(data);
 };
+
+// const getData = async () => {
+//   const data = await apiFetch('http://localhost:8080/professional');
+//   displayAllData(data);
+// };
 
 function displayAllData(data) {
   displayProfessionalName(data.professionalName);
