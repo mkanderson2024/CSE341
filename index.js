@@ -14,7 +14,6 @@ connectDB();
 //Route for contacts for lesson 1
 app.use('/', contactRoute);
 
-
 // From Activity 1
 // app.get('/', (req, res) => {
 //     res.send('Connected to MongoDB, Welcome!')

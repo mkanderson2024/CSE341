@@ -6,7 +6,7 @@ async function apiFetch(url) {
 }
 
 const getData = async () => {
-  const data = await apiFetch('/professional');
+  const data = await apiFetch('/contact');
   console.log(data)
   displayAllData(data);
 };
