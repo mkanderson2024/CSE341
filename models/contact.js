@@ -19,6 +19,14 @@ const contactSchema = new mongoose.Schema({
     email: { type: String, required: true },
     favoriteColor: { type: String, required: true },
     birthday: {type: String, required: true}
+
+});
+
+contactSchema.set('toJSON', {
+    transform: (doc, ret) => {
+        delete ret.__v;
+        return ret;
+    }
 });
 
 module.exports = mongoose.model('Contact', contactSchema)
