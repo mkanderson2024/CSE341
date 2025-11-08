@@ -1,12 +1,18 @@
 const express = require('express');
 const { connectDB } = require('./Connection');
 const contactRoute = require('./routes/contactRoute')
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger-output.json')
 
 const app = express();
 
 // Public Frontend Files
-app.use(express.static('public'));
-app.use(express.json());
+
+// Using this: Order matters
+app
+    .use(express.static('public'))
+    .use(express.json())
+    .use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 
 //Connection to MongoDB
 connectDB();

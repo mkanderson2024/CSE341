@@ -1,15 +1,21 @@
 const Contact = require('../models/contact');
-const { normalizeContacts } = require('../utility/contactsUtility');
+
+// Old code commented out for now.
+// const { normalizeContacts } = require('../utility/contactsUtility');
 
 // Find all contacts
 const getAllContacts = async (req, res) => {
   console.log("Get all contacts controller reached")
   try {
     const contacts = await Contact.find({});
-    const normalizedContacts = contacts.map(c => normalizeContacts(c.toObject()));
 
-    // Return the first contact for now
-    res.json(normalizedContacts[0]);
+    // Old code commented out for now.
+    // const normalizedContacts = contacts.map(c => normalizeContacts(c.toObject()));
+    // // Return all contacts
+    // res.json(normalizedContacts[0]);
+
+    //Return all contacts
+    res.status(200).json(contacts)
 
   } catch (err) {
     console.error('Error fetching all contacts:', err);
@@ -22,15 +28,21 @@ const getContactById = async (req, res) => {
   console.log("Get contact by id reached")
   try {
     const { id } = req.params;
-    const contact = await Contact.findById(id);
+    const contact = await Contact.findById(id)
+    // Old code commented out for now.
+    // const contact = await Contact.findById(id);
 
     if (!contact) {
       return res.status(404).json({ error: 'Contact not found' });
     }
 
-    const normalizedContact = normalizeContacts(contact.toObject());
-    res.json(normalizedContact);
-    console.log('Normalized contact:', JSON.stringify(normalizedContact, null, 2));
+    // Old code commented out for now.
+    // const normalizedContact = normalizeContacts(contact.toObject());
+    // res.json(normalizedContact);
+    // console.log('Normalized contact:', JSON.stringify(normalizedContact, null, 2));
+
+    res.status(200).json(contact);
+    console.log('Found contact', JSON.stringify(contact, null, 2));
 
   } catch (err) {
     console.error('Error fetching contact by ID:', err);
