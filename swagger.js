@@ -5,7 +5,7 @@ const doc = {
     title: 'My API',
     description: 'Description'
   },
-  host: process.env.HOST || 'localhost:8080',
+  host: 'cse341-chg2.onrender.com' || 'localhost:8080',
   schemes: ['http', 'https']
 };
 
