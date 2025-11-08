@@ -14,7 +14,7 @@
   "paths": {
     "/contact": {
       "get": {
-        "description": "",
+        "description": "Gets all the contacts from the server.",
         "responses": {
           "200": {
             "description": "OK"
@@ -25,7 +25,7 @@
         }
       },
       "post": {
-        "description": "",
+        "description": "Adds a new contact to the server.",
         "parameters": [
           {
             "name": "body",
@@ -64,7 +64,7 @@
     },
     "/contact/{id}": {
       "get": {
-        "description": "",
+        "description": "Gets a specific contact based upon id",
         "parameters": [
           {
             "name": "id",
@@ -86,7 +86,7 @@
         }
       },
       "put": {
-        "description": "",
+        "description": "Updates a contact using the contact id",
         "parameters": [
           {
             "name": "id",
@@ -132,7 +132,7 @@
         }
       },
       "delete": {
-        "description": "",
+        "description": "Deletes a contact by id.",
         "parameters": [
           {
             "name": "id",
