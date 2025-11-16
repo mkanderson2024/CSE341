@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 require("dotenv").config();
 
-const uri = process.env.MONGODB_URI + "/cse341db-books";
+const uri = process.env.MONGODB_URI;
 
 // Create the connection and export it
 const booksDB = mongoose.createConnection(uri);
