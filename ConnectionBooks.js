@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-require('dotenv').config(); // load .env first
+require('dotenv').config();
 
 const uri = process.env.MONGODB_URI;
 
@@ -10,9 +10,8 @@ if (!uri) {
 
 console.log('Connecting to MongoDB Books DB');
 
-// Connect using mongoose.connect since we have one database
 mongoose.connect(uri)
   .then(() => console.log('Connected to cse341db-books successfully'))
   .catch((err) => console.error('MongoDB connection error:', err));
 
-module.exports = mongoose; // export the default mongoose instance
+module.exports = mongoose;
