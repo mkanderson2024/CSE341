@@ -1,197 +1,188 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "My API",
-    "description": "Description",
+    "title": "CSE341 Books & Wishlist API",
+    "description": "API for managing books and wishlist items",
     "version": "1.0.0"
   },
   "host": "cse341-chg2.onrender.com",
   "basePath": "/",
   "schemes": ["http", "https"],
   "paths": {
-    "/contact/": {
-      "get": {
-        "description": "",
-        "responses": { "200": { "description": "OK" }, "500": { "description": "Internal Server Error" } }
-      },
-      "post": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "firstName": { "example": "any" },
-                "lastName": { "example": "any" },
-                "email": { "example": "any" },
-                "favoriteColor": { "example": "any" },
-                "birthday": { "example": "any" }
-              }
-            }
-          }
-        ],
-        "responses": { "201": { "description": "Created" }, "500": { "description": "Internal Server Error" } }
-      }
-    },
-    "/contact/{id}": {
-      "get": {
-        "parameters": [{ "name": "id", "in": "path", "required": true, "type": "string" }],
-        "responses": { "200": { "description": "OK" }, "404": { "description": "Not Found" }, "500": { "description": "Internal Server Error" } }
-      },
-      "put": {
-        "parameters": [
-          { "name": "id", "in": "path", "required": true, "type": "string" },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "firstName": { "example": "any" },
-                "lastName": { "example": "any" },
-                "email": { "example": "any" },
-                "favoriteColor": { "example": "any" },
-                "birthday": { "example": "any" }
-              }
-            }
-          }
-        ],
-        "responses": { "200": { "description": "OK" }, "404": { "description": "Not Found" }, "500": { "description": "Internal Server Error" } }
-      },
-      "delete": {
-        "parameters": [{ "name": "id", "in": "path", "required": true, "type": "string" }],
-        "responses": { "200": { "description": "OK" }, "404": { "description": "Not Found" }, "500": { "description": "Internal Server Error" } }
-      }
-    },
     "/book/": {
-      "get": { "responses": { "default": { "description": "" } } },
+      "get": {
+        "summary": "Get all books",
+        "responses": {
+          "200": {
+            "description": "List of all books",
+            "schema": {
+              "type": "array",
+              "items": { "$ref": "#/definitions/Book" }
+            }
+          },
+          "500": { "description": "Internal Server Error" }
+        }
+      },
       "post": {
-        "description": "Create a new book",
+        "summary": "Create a new book",
         "parameters": [
           {
             "name": "book",
             "in": "body",
+            "description": "Book object to create",
             "required": true,
-            "schema": {
-              "type": "object",
-              "required": ["authorFirstName", "authorLastName", "bookTitle"],
-              "properties": {
-                "authorFirstName": { "type": "string", "example": "John" },
-                "authorLastName": { "type": "string", "example": "Doe" },
-                "bookTitle": { "type": "string", "example": "My Book" },
-                "bookGenre": { "type": "string", "example": "Fiction" },
-                "numberOfPages": { "type": "number", "example": 250 },
-                "printType": { "type": "string", "example": "Hardcover" },
-                "numberOfCopies": { "type": "number", "example": 10 }
-              }
-            }
+            "schema": { "$ref": "#/definitions/Book" }
           }
         ],
         "responses": {
-          "201": { "description": "Book created" },
-          "400": { "description": "Bad request" },
-          "500": { "description": "Internal server error" }
+          "201": { "description": "Book created successfully" },
+          "400": { "description": "Bad Request" },
+          "500": { "description": "Internal Server Error" }
         }
       }
     },
     "/book/{id}": {
-      "get": { "parameters": [{ "name": "id", "in": "path", "required": true, "type": "string" }], "responses": { "default": { "description": "" } } },
+      "get": {
+        "summary": "Get a book by ID",
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "type": "string" }
+        ],
+        "responses": {
+          "200": { "description": "Book found", "schema": { "$ref": "#/definitions/Book" } },
+          "404": { "description": "Book not found" },
+          "500": { "description": "Internal Server Error" }
+        }
+      },
       "put": {
-        "description": "Update a book by ID",
+        "summary": "Update a book by ID",
         "parameters": [
           { "name": "id", "in": "path", "required": true, "type": "string" },
           {
             "name": "book",
             "in": "body",
+            "description": "Updated book data",
             "required": true,
-            "schema": {
-              "type": "object",
-              "properties": {
-                "authorFirstName": { "type": "string", "example": "John" },
-                "authorLastName": { "type": "string", "example": "Doe" },
-                "bookTitle": { "type": "string", "example": "My Book" },
-                "bookGenre": { "type": "string", "example": "Fiction" },
-                "numberOfPages": { "type": "number", "example": 250 },
-                "printType": { "type": "string", "example": "Hardcover" },
-                "numberOfCopies": { "type": "number", "example": 10 }
-              }
-            }
+            "schema": { "$ref": "#/definitions/Book" }
           }
         ],
         "responses": {
-          "200": { "description": "Book updated" },
-          "400": { "description": "Bad request" },
+          "200": { "description": "Book updated successfully", "schema": { "$ref": "#/definitions/Book" } },
+          "400": { "description": "Bad Request" },
           "404": { "description": "Book not found" },
-          "500": { "description": "Internal server error" }
+          "500": { "description": "Internal Server Error" }
         }
       },
-      "delete": { "parameters": [{ "name": "id", "in": "path", "required": true, "type": "string" }], "responses": { "default": { "description": "" } } }
+      "delete": {
+        "summary": "Delete a book by ID",
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "type": "string" }
+        ],
+        "responses": {
+          "200": { "description": "Book deleted successfully" },
+          "404": { "description": "Book not found" },
+          "500": { "description": "Internal Server Error" }
+        }
+      }
     },
     "/wishlist/": {
-      "get": { "responses": { "default": { "description": "" } } },
+      "get": {
+        "summary": "Get all wishlist items",
+        "responses": {
+          "200": {
+            "description": "List of all wishlist items",
+            "schema": { "type": "array", "items": { "$ref": "#/definitions/Wishlist" } }
+          },
+          "500": { "description": "Internal Server Error" }
+        }
+      },
       "post": {
-        "description": "Add a new wishlist item",
+        "summary": "Add a new wishlist item",
         "parameters": [
           {
             "name": "wishlistItem",
             "in": "body",
+            "description": "Wishlist item to create",
             "required": true,
-            "schema": {
-              "type": "object",
-              "required": ["authorFirstName", "authorLastName", "bookTitle"],
-              "properties": {
-                "authorFirstName": { "type": "string", "example": "Jane" },
-                "authorLastName": { "type": "string", "example": "Doe" },
-                "bookTitle": { "type": "string", "example": "Wishlist Book" },
-                "bookGenre": { "type": "string", "example": "Non-fiction" },
-                "numberOfPages": { "type": "number", "example": 150 },
-                "printType": { "type": "string", "example": "Paperback" },
-                "numberOfCopies": { "type": "number", "example": 5 }
-              }
-            }
+            "schema": { "$ref": "#/definitions/Wishlist" }
           }
         ],
         "responses": {
-          "201": { "description": "Wishlist item created" },
-          "400": { "description": "Bad request" },
-          "500": { "description": "Internal server error" }
+          "201": { "description": "Wishlist item created successfully" },
+          "400": { "description": "Bad Request" },
+          "500": { "description": "Internal Server Error" }
         }
       }
     },
     "/wishlist/{id}": {
-      "get": { "parameters": [{ "name": "id", "in": "path", "required": true, "type": "string" }], "responses": { "default": { "description": "" } } },
+      "get": {
+        "summary": "Get a wishlist item by ID",
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "type": "string" }
+        ],
+        "responses": {
+          "200": { "description": "Wishlist item found", "schema": { "$ref": "#/definitions/Wishlist" } },
+          "404": { "description": "Wishlist item not found" },
+          "500": { "description": "Internal Server Error" }
+        }
+      },
       "put": {
-        "description": "Update a wishlist item by ID",
+        "summary": "Update a wishlist item by ID",
         "parameters": [
           { "name": "id", "in": "path", "required": true, "type": "string" },
           {
             "name": "wishlistItem",
             "in": "body",
+            "description": "Updated wishlist item data",
             "required": true,
-            "schema": {
-              "type": "object",
-              "properties": {
-                "authorFirstName": { "type": "string", "example": "Jane" },
-                "authorLastName": { "type": "string", "example": "Doe" },
-                "bookTitle": { "type": "string", "example": "Wishlist Book" },
-                "bookGenre": { "type": "string", "example": "Non-fiction" },
-                "numberOfPages": { "type": "number", "example": 150 },
-                "printType": { "type": "string", "example": "Paperback" },
-                "numberOfCopies": { "type": "number", "example": 5 }
-              }
-            }
+            "schema": { "$ref": "#/definitions/Wishlist" }
           }
         ],
         "responses": {
-          "200": { "description": "Wishlist item updated" },
-          "400": { "description": "Bad request" },
+          "200": { "description": "Wishlist item updated successfully", "schema": { "$ref": "#/definitions/Wishlist" } },
+          "400": { "description": "Bad Request" },
           "404": { "description": "Wishlist item not found" },
-          "500": { "description": "Internal server error" }
+          "500": { "description": "Internal Server Error" }
         }
       },
-      "delete": { "parameters": [{ "name": "id", "in": "path", "required": true, "type": "string" }], "responses": { "default": { "description": "" } } }
+      "delete": {
+        "summary": "Delete a wishlist item by ID",
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "type": "string" }
+        ],
+        "responses": {
+          "200": { "description": "Wishlist item deleted successfully" },
+          "404": { "description": "Wishlist item not found" },
+          "500": { "description": "Internal Server Error" }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Book": {
+      "type": "object",
+      "required": ["authorFirstName", "authorLastName", "bookTitle"],
+      "properties": {
+        "authorFirstName": { "type": "string" },
+        "authorLastName": { "type": "string" },
+        "bookTitle": { "type": "string" },
+        "bookGenre": { "type": "string" },
+        "numberOfPages": { "type": "integer" },
+        "printType": { "type": "string" },
+        "numberOfCopies": { "type": "integer" }
+      }
+    },
+    "Wishlist": {
+      "type": "object",
+      "required": ["authorFirstName", "authorLastName", "bookTitle"],
+      "properties": {
+        "authorFirstName": { "type": "string" },
+        "authorLastName": { "type": "string" },
+        "bookTitle": { "type": "string" },
+        "bookGenre": { "type": "string" },
+        "numberOfPages": { "type": "integer" },
+        "printType": { "type": "string" },
+        "numberOfCopies": { "type": "integer" }
+      }
     }
   }
 }
