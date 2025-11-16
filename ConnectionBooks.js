@@ -4,7 +4,6 @@ require('dotenv').config();
 const uriBase = process.env.MONGODB_URI.replace(/\/$/, '');
 const dbName = 'cse341db-books';
 
-
 const booksDBUri = `${uriBase}/${dbName}?retryWrites=true&w=majority`;
 
 console.log('Connecting to MongoDB Books DB at:', booksDBUri);

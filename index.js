@@ -1,6 +1,6 @@
 const express = require('express');
-const { connectContactsDB } = require('./ConnectionContacts');
-const { booksDB} = require('./ConnectionBooks');
+const { booksDB } = require('./ConnectionBooks');
+const { contactsDB } = require('./ConnectionContacts');
 const contactRoute = require('./routes/contactRoute')
 const bookRoute = require('./routes/bookRoute')
 const wishlistRoute = require('./routes/wishlistRoute')
@@ -19,7 +19,6 @@ app
 
 
 //Connection to MongoDB
-connectContactsDB();
 
 //Route for contacts for lesson 1
 app.use('/contact', contactRoute);
