@@ -1,17 +1,15 @@
 const mongoose = require('mongoose');
-require("dotenv").config()
+require("dotenv").config();
 
-const uri = process.env.MONGODB_URI + "/cse341db";
-
+const uriBase = process.env.MONGODB_URI;
 
 const connectContactsDB = async () => {
   try {
-    await mongoose.connect(uri, {
-    });
+    await mongoose.connect(`${uriBase}cse341db`);
     console.log("Connected to cse341db on MongoDB");
   } catch (err) {
     console.error("MongoDB Connection to Contacts Database error:", err);
   }
 };
 
-module.exports = { connectContactsDB, mongoose }
+module.exports = { connectContactsDB, mongoose };

@@ -1,17 +1,12 @@
 const mongoose = require('mongoose');
 require("dotenv").config();
 
-const uri = process.env.MONGODB_URI;
+const uriBase = process.env.MONGODB_URI;
 
 // Create the connection and export it
-const booksDB = mongoose.createConnection(uri);
+const booksDB = mongoose.createConnection(`${uriBase}cse341db-books`);
 
-booksDB.once('open', () => {
-    console.log("Connected to cse341db-books on MongoDB");
-});
-
-booksDB.on('error', (err) => {
-    console.error("MongoDB Connection to Books Database error:", err);
-});
+booksDB.once('open', () => console.log('Connected to cse341db-books'));
+booksDB.on('error', (err) => console.error('Books DB connection error:', err));
 
 module.exports = { booksDB };
