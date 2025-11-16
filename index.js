@@ -1,7 +1,5 @@
 const express = require('express');
-const { booksDB } = require('./ConnectionBooks');
-const { contactsDB } = require('./ConnectionContacts');
-const contactRoute = require('./routes/contactRoute')
+const mongoose = require('./ConnectionBooks');
 const bookRoute = require('./routes/bookRoute')
 const wishlistRoute = require('./routes/wishlistRoute')
 const swaggerUi = require('swagger-ui-express');
@@ -21,7 +19,6 @@ app
 //Connection to MongoDB
 
 //Route for contacts for lesson 1
-app.use('/contact', contactRoute);
 app.use('/book', bookRoute);
 app.use('/wishlist', wishlistRoute);
 
