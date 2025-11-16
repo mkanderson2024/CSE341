@@ -4,18 +4,18 @@ const contactController = require('../controllers/contactController');
 // const { getAllContacts, getContactById } = require('../controllers/contactController'); Originally created
 
 //Gets all contacts
-router.get('/contact', contactController.getAllContacts);
+router.get('/', contactController.getAllContacts);
 
 //Get one contact by id
-router.get('/contact/:id', contactController.getContactById);
+router.get('/:id', contactController.getContactById);
 
 //Post a new contact
-router.post('/contact', contactController.createContact)
+router.post('/', contactController.createContact)
 
 //Put (update) a contact by id
-router.put('/contact/:id', contactController.updateContact)
+router.put('/:id', contactController.updateContact)
 
 //Delete a contact by id
-router.delete('/contact/:id', contactController.deleteContact)
+router.delete('/:id', contactController.deleteContact)
 
 module.exports = router;

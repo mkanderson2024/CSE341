@@ -7,25 +7,15 @@
   },
   "host": "cse341-chg2.onrender.com",
   "basePath": "/",
-  "schemes": [
-    "http",
-    "https"
-  ],
+  "schemes": ["http", "https"],
   "paths": {
-    "/contact": {
+    "/contact/": {
       "get": {
-        "description": "Gets all the contacts from the server.",
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
+        "description": "",
+        "responses": { "200": { "description": "OK" }, "500": { "description": "Internal Server Error" } }
       },
       "post": {
-        "description": "Adds a new contact to the server.",
+        "description": "",
         "parameters": [
           {
             "name": "body",
@@ -33,126 +23,175 @@
             "schema": {
               "type": "object",
               "properties": {
-                "firstName": {
-                  "example": "any"
-                },
-                "lastName": {
-                  "example": "any"
-                },
-                "email": {
-                  "example": "any"
-                },
-                "favoriteColor": {
-                  "example": "any"
-                },
-                "birthday": {
-                  "example": "any"
-                }
+                "firstName": { "example": "any" },
+                "lastName": { "example": "any" },
+                "email": { "example": "any" },
+                "favoriteColor": { "example": "any" },
+                "birthday": { "example": "any" }
               }
             }
           }
         ],
-        "responses": {
-          "201": {
-            "description": "Created"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
+        "responses": { "201": { "description": "Created" }, "500": { "description": "Internal Server Error" } }
       }
     },
     "/contact/{id}": {
       "get": {
-        "description": "Gets a specific contact based upon id",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
+        "parameters": [{ "name": "id", "in": "path", "required": true, "type": "string" }],
+        "responses": { "200": { "description": "OK" }, "404": { "description": "Not Found" }, "500": { "description": "Internal Server Error" } }
       },
       "put": {
-        "description": "Updates a contact using the contact id",
         "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
+          { "name": "id", "in": "path", "required": true, "type": "string" },
           {
             "name": "body",
             "in": "body",
             "schema": {
               "type": "object",
               "properties": {
-                "firstName": {
-                  "example": "any"
-                },
-                "lastName": {
-                  "example": "any"
-                },
-                "email": {
-                  "example": "any"
-                },
-                "favoriteColor": {
-                  "example": "any"
-                },
-                "birthday": {
-                  "example": "any"
-                }
+                "firstName": { "example": "any" },
+                "lastName": { "example": "any" },
+                "email": { "example": "any" },
+                "favoriteColor": { "example": "any" },
+                "birthday": { "example": "any" }
+              }
+            }
+          }
+        ],
+        "responses": { "200": { "description": "OK" }, "404": { "description": "Not Found" }, "500": { "description": "Internal Server Error" } }
+      },
+      "delete": {
+        "parameters": [{ "name": "id", "in": "path", "required": true, "type": "string" }],
+        "responses": { "200": { "description": "OK" }, "404": { "description": "Not Found" }, "500": { "description": "Internal Server Error" } }
+      }
+    },
+    "/book/": {
+      "get": { "responses": { "default": { "description": "" } } },
+      "post": {
+        "description": "Create a new book",
+        "parameters": [
+          {
+            "name": "book",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": ["authorFirstName", "authorLastName", "bookTitle"],
+              "properties": {
+                "authorFirstName": { "type": "string", "example": "John" },
+                "authorLastName": { "type": "string", "example": "Doe" },
+                "bookTitle": { "type": "string", "example": "My Book" },
+                "bookGenre": { "type": "string", "example": "Fiction" },
+                "numberOfPages": { "type": "number", "example": 250 },
+                "printType": { "type": "string", "example": "Hardcover" },
+                "numberOfCopies": { "type": "number", "example": 10 }
               }
             }
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
+          "201": { "description": "Book created" },
+          "400": { "description": "Bad request" },
+          "500": { "description": "Internal server error" }
         }
-      },
-      "delete": {
-        "description": "Deletes a contact by id.",
+      }
+    },
+    "/book/{id}": {
+      "get": { "parameters": [{ "name": "id", "in": "path", "required": true, "type": "string" }], "responses": { "default": { "description": "" } } },
+      "put": {
+        "description": "Update a book by ID",
         "parameters": [
+          { "name": "id", "in": "path", "required": true, "type": "string" },
           {
-            "name": "id",
-            "in": "path",
+            "name": "book",
+            "in": "body",
             "required": true,
-            "type": "string"
+            "schema": {
+              "type": "object",
+              "properties": {
+                "authorFirstName": { "type": "string", "example": "John" },
+                "authorLastName": { "type": "string", "example": "Doe" },
+                "bookTitle": { "type": "string", "example": "My Book" },
+                "bookGenre": { "type": "string", "example": "Fiction" },
+                "numberOfPages": { "type": "number", "example": 250 },
+                "printType": { "type": "string", "example": "Hardcover" },
+                "numberOfCopies": { "type": "number", "example": 10 }
+              }
+            }
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
+          "200": { "description": "Book updated" },
+          "400": { "description": "Bad request" },
+          "404": { "description": "Book not found" },
+          "500": { "description": "Internal server error" }
+        }
+      },
+      "delete": { "parameters": [{ "name": "id", "in": "path", "required": true, "type": "string" }], "responses": { "default": { "description": "" } } }
+    },
+    "/wishlist/": {
+      "get": { "responses": { "default": { "description": "" } } },
+      "post": {
+        "description": "Add a new wishlist item",
+        "parameters": [
+          {
+            "name": "wishlistItem",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": ["authorFirstName", "authorLastName", "bookTitle"],
+              "properties": {
+                "authorFirstName": { "type": "string", "example": "Jane" },
+                "authorLastName": { "type": "string", "example": "Doe" },
+                "bookTitle": { "type": "string", "example": "Wishlist Book" },
+                "bookGenre": { "type": "string", "example": "Non-fiction" },
+                "numberOfPages": { "type": "number", "example": 150 },
+                "printType": { "type": "string", "example": "Paperback" },
+                "numberOfCopies": { "type": "number", "example": 5 }
+              }
+            }
           }
+        ],
+        "responses": {
+          "201": { "description": "Wishlist item created" },
+          "400": { "description": "Bad request" },
+          "500": { "description": "Internal server error" }
         }
       }
+    },
+    "/wishlist/{id}": {
+      "get": { "parameters": [{ "name": "id", "in": "path", "required": true, "type": "string" }], "responses": { "default": { "description": "" } } },
+      "put": {
+        "description": "Update a wishlist item by ID",
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "type": "string" },
+          {
+            "name": "wishlistItem",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "authorFirstName": { "type": "string", "example": "Jane" },
+                "authorLastName": { "type": "string", "example": "Doe" },
+                "bookTitle": { "type": "string", "example": "Wishlist Book" },
+                "bookGenre": { "type": "string", "example": "Non-fiction" },
+                "numberOfPages": { "type": "number", "example": 150 },
+                "printType": { "type": "string", "example": "Paperback" },
+                "numberOfCopies": { "type": "number", "example": 5 }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Wishlist item updated" },
+          "400": { "description": "Bad request" },
+          "404": { "description": "Wishlist item not found" },
+          "500": { "description": "Internal server error" }
+        }
+      },
+      "delete": { "parameters": [{ "name": "id", "in": "path", "required": true, "type": "string" }], "responses": { "default": { "description": "" } } }
     }
   }
 }

@@ -10,7 +10,11 @@ const doc = {
 };
 
 const outputFile = './swagger-output.json';
-const routes = ['./routes/contactRoute.js'];
+const routes = [
+  './index.js',
+  './routes/bookRoute.js',
+  './routes/wishlistRoute.js'
+];
 // This is all you need to fix for the week 2 assignmetn ^
 
 /* NOTE: If you are using the express Router, you must pass in the 'routes' only the 
