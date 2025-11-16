@@ -1,8 +1,4 @@
-const { booksDB } = require('../ConnectionBooks');
-const { bookSchemaExport } = require('../models/book');
-
-// Create the Book model using the booksDB connection
-const Book = bookSchemaExport(booksDB);
+const Book = require('../models/book');
 
 // Get all books
 const getAllbooks = async (req, res) => {
@@ -33,7 +29,19 @@ const createbook = async (req, res) => {
 
 // Update book by ID
 const updatebook = async (req, res) => {
-    const updatedBook = await Book.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    const updatedBook = await Book.findByIdAndUpdate(
+        req.params.id,
+        {
+            authorFirstName: req.body.authorFirstName,
+            authorLastName: req.body.authorLastName,
+            bookTitle: req.body.bookTitle,
+            bookGenre: req.body.bookGenre,
+            numberOfPages: req.body.numberOfPages,
+            printType: req.body.printType,
+            numberOfCopies: req.body.numberOfCopies
+        },
+        { new: true }
+    );
     if (!updatedBook) return res.status(404).json({ error: 'Book not found' });
     res.status(200).json(updatedBook);
 };

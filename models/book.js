@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require('../ConnectionBooks'); // uses the default connection
 
 // Book schema
 const bookSchema = new mongoose.Schema({
@@ -11,6 +11,7 @@ const bookSchema = new mongoose.Schema({
     numberOfCopies: Number
 });
 
+// Wishlist schema
 const wishlistSchema = new mongoose.Schema({
     authorFirstName: String,
     authorLastName: String,
@@ -21,15 +22,10 @@ const wishlistSchema = new mongoose.Schema({
     numberOfCopies: Number
 });
 
-function bookSchemaExport(db) {
-    return db.model('Book', bookSchema);
-}
-
-function wishlistSchemaExport(db) {
-    return db.model('Wishlist', wishlistSchema);
-}
+const Book = mongoose.model('Book', bookSchema);
+const Wishlist = mongoose.model('Wishlist', wishlistSchema);
 
 module.exports = {
-    bookSchemaExport,
-    wishlistSchemaExport
+    Book,
+    Wishlist
 };

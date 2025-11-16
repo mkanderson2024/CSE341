@@ -1,9 +1,4 @@
-// controllers/wishlistController.js
-const { booksDB } = require('../ConnectionBooks');
-const { wishlistSchemaExport } = require('../models/book');
-
-// Create the Wishlist model using the booksDB connection
-const Wishlist = wishlistSchemaExport(booksDB);
+const { Wishlist } = require('../models/book'); // import directly from models
 
 // Get all wishlist items
 const getAllWishlistItems = async (req, res) => {
@@ -34,7 +29,20 @@ const addWishlistItem = async (req, res) => {
 
 // Update item in wishlist
 const updateWishlistItem = async (req, res) => {
-    const updatedItem = await Wishlist.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    const updatedItem = await Wishlist.findByIdAndUpdate(
+        req.params.id,
+        {
+            authorFirstName: req.body.authorFirstName,
+            authorLastName: req.body.authorLastName,
+            bookTitle: req.body.bookTitle,
+            bookGenre: req.body.bookGenre,
+            numberOfPages: req.body.numberOfPages,
+            printType: req.body.printType,
+            numberOfCopies: req.body.numberOfCopies
+        },
+        { new: true }
+    );
+
     if (!updatedItem) return res.status(404).json({ error: 'Wishlist item not found' });
     res.status(200).json(updatedItem);
 };
