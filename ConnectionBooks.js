@@ -8,7 +8,7 @@ if (!uri) {
   process.exit(1); // stop app if URI missing
 }
 
-console.log('Connecting to MongoDB Books DB at:', uri);
+console.log('Connecting to MongoDB Books DB');
 
 // Connect using mongoose.connect since we have one database
 mongoose.connect(uri)
