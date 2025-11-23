@@ -3,21 +3,22 @@ const router = express.Router();
 const wishlistController = require('../controllers/wishlistController');
 const errorHandler = require('../utility/errorHandler');
 const validate = require('../utility/validationUtility');
-const { validationRules } = require ('../utility/validatorRules');
+const { validationRules } = require('../utility/validatorRules');
+const authenticationToken = require('../utility/authenticate');
 
-// Get all wishlist items
+// Get all wishlist items (public)
 router.get('/', errorHandler(wishlistController.getAllWishlistItems));
 
-// Get one wishlist item by ID
+// Get one wishlist item by ID (public)
 router.get('/:id', errorHandler(wishlistController.getWishlistItemById));
 
-// Add book to wishlist
-router.post('/', validationRules,validate,errorHandler(wishlistController.addWishlistItem));
+// Add book to wishlist (protected)
+router.post('/', authenticationToken, validationRules, validate, errorHandler(wishlistController.addWishlistItem));
 
-// Update wishlist item by ID
-router.put('/:id', validationRules,validate,errorHandler(wishlistController.updateWishlistItem));
+// Update wishlist item by ID (protected)
+router.put('/:id', authenticationToken, validationRules, validate, errorHandler(wishlistController.updateWishlistItem));
 
-// Delete wishlist item by ID
-router.delete('/:id', errorHandler(wishlistController.deleteWishlistItem));
+// Delete wishlist item by ID (protected)
+router.delete('/:id', authenticationToken, errorHandler(wishlistController.deleteWishlistItem));
 
 module.exports = router;

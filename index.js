@@ -1,6 +1,8 @@
 const express = require('express');
+// Routes
 const mongoose = require('./ConnectionBooks');
 const bookRoute = require('./routes/bookRoute')
+const authenticationRoute = require('./routes/authenticationRoute')
 const wishlistRoute = require('./routes/wishlistRoute')
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger-output.json')
@@ -21,6 +23,7 @@ app
 //Route for contacts for lesson 1
 app.use('/book', bookRoute);
 app.use('/wishlist', wishlistRoute);
+app.use('/authenticate', authenticationRoute);
 
 // Global Error Middleware
  app.use((err,req,res,next) => {
